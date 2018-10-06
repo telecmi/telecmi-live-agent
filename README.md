@@ -50,7 +50,7 @@ This callback will trigger once live call feed connection will try to establish 
 **Connect**
  .
 ```javascript
-  telecmi.onStatus=function(data){
+  telecmi.onConnect=function(data){
   //Data is JSON it contain event and status
   };
 ```
