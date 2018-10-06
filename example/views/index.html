@@ -7,7 +7,7 @@
 		
 		angular.module('telecmi',[]).controller('mainController',function($scope,$http){
 			var telecmi = new TeleCMI();
-$http.post('https://piopiy.telecmi.com/v1/agentLogin',{id:'1_1111113',password:'40709104313'}).then(function(data){
+$http.post('https://piopiy.telecmi.com/v1/agentLogin',{id:'xxxxx',password:'xxxx'}).then(function(data){
 	if(data.data.code==200)
 	{
 		telecmi.start(data.data.token);
@@ -17,6 +17,7 @@ $http.post('https://piopiy.telecmi.com/v1/agentLogin',{id:'1_1111113',password:'
           console.log(telecmi)
 		telecmi.onConnect= function(data)
 		{
+			console.log(data)
 			if(data.status=='connected')
 			{
 				telecmi.subscribeAgents();
