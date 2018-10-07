@@ -24,9 +24,9 @@ Documents
 
     yarn add agent-call-feed
 
-**CDN**
+**Add to your page**
 
-    <script src="https://app.telecmi.com/1.0/agent-call-feed.min.js"></script>
+    <script src="dist/agent-call-feed.min.js"></script>
 
 ## **Get Started**
 
