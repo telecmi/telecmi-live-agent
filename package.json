@@ -1,27 +1,25 @@
 {
-  "name": "agent-call-feed",
+  "name": "telecmi-live-agent",
   "version": "1.0.0",
-  "description": "TeleCMI agent live call feed",
-  "main": "index.js",
+  "description": "TeleCMI agent live call feed javascript sdk for browser",
+  "main": "Gruntfile.js",
+  "directories": {
+    "example": "example"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/telecmi/agent-call-feed.git"
+    "url": "git+https://github.com/telecmi/telecmi-live-agent.git"
   },
   "keywords": [
-    "TeleCMI"
+    "telecmi"
   ],
-  "author": "Murugan Pandian",
+  "author": "TeleCMI Technologies",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/telecmi/agent-call-feed/issues"
+    "url": "https://github.com/telecmi/telecmi-live-agent/issues"
   },
-  "homepage": "https://github.com/telecmi/agent-call-feed#readme",
-  "dependencies": {
-    "express": "^4.16.3",
-    "grunt": "^1.0.3",
-    "grunt-contrib-uglify": "^4.0.0"
-  }
+  "homepage": "https://github.com/telecmi/telecmi-live-agent#readme"
 }
