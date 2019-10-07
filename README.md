@@ -14,15 +14,15 @@ Documents
 
  **Bower**
 
-    bower install agent-call-feed
+    bower install telecmi-live-agent
 
 **npm**
 
-    npm install agent-call-feed
+    npm install telecmi-live-agent
     
 **yarn**
 
-    yarn add agent-call-feed
+    yarn add telecmi-live-agent
 
 **Add to your page**
 
