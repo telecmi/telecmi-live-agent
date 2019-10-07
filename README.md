@@ -12,10 +12,6 @@ Documents
 
 ## **Install**
 
- **Bower**
-
-    bower install telecmi-live-agent
-
 **npm**
 
     npm install telecmi-live-agent
