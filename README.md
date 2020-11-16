@@ -14,15 +14,15 @@ Documents
 
 **npm**
 
-    npm install telecmi-live-agent
+    npm install telecmi-agent-livefeed
     
 **yarn**
 
-    yarn add telecmi-live-agent
+    yarn add telecmi-agent-livefeed
 
 **Add to your page**
 
-    <script src="dist/agent-call-feed.min.js"></script>
+    <script src="dist/telecmi-agent-livefeed.min.js"></script>
 
 ## **Get Started**
 
@@ -73,7 +73,27 @@ connected | Live call feed connection established |
 error | Invalid token need to check token |
 
 
+## Set Agent status  
+**Online**
 
+Make agent status online
+```javascript
+  telecmi.setOnline();
+```
+
+**Break**
+
+Make agent status break/Away
+```javascript
+  telecmi.setBreak();
+```
+
+**Dialer**
+
+Make agent status dialer
+```javascript
+  telecmi.setDialer();
+```
 
 ## Subscribe 
 **Call Events**
