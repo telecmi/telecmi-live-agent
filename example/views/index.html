@@ -2,19 +2,20 @@
 <head>
 	<title>Agent Call Feed </title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	<script type="text/javascript" src="js/agent-call-feed.min.js"></script>
+	<script type="text/javascript" src="js/telecmi-agent-callfeed.min.js"></script>
 	<script type="text/javascript">
 		
 		angular.module('telecmi',[]).controller('mainController',function($scope,$http){
-			var telecmi = new TeleCMI();
-$http.post('https://piopiy.telecmi.com/v1/agentLogin',{id:'xxxxx',password:'xxxx'}).then(function(data){
+			window.telecmi = new TeleCMI();
+$http.post('https://piopiy.telecmi.com/v1/agentLogin',{id:'109_1111113',password:'123456'}).then(function(data){
+	
 	if(data.data.code==200)
 	{
 		telecmi.start(data.data.token);
 	}
 })
 		
-          console.log(telecmi)
+          
 		telecmi.onConnect= function(data)
 		{
 			console.log(data)
