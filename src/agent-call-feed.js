@@ -1,126 +1,142 @@
 "use strict";
-window.TeleCMI = ( function () {
+window.CHUB = ( function () {
     var self = this;
 
 
     this.socket = {};
 
 
-    TeleCMI.prototype.start = function ( token ) {
+    CHUB.prototype.start = function ( token ) {
+
+
         if ( !token ) {
 
             this.onStatus( { status: 'error', msg: 'Invalid token' } );
             return;
         }
+
+
         this.socket = io( 'https://live.telecmi.com', { query: { token: token } } )
 
 
-
-        // Agent List 
+        // List of agents
         this.socket.on( 'agents-list', function ( data ) {
             self.onAgents( data );
         } )
 
-
-        this.socket.on( 'connect', function () {
-            self.onConnect( { status: 'connected' } )
-        } );
-
-
-        this.socket.on( 'error', function ( err ) {
-            self.onConnect( { status: 'error', msg: err } )
-        } );
-
-        this.socket.on( 'connect_failed', function ( err ) {
-            self.onConnect( { status: 'error', msg: err } )
-        } )
-
-        // On going Calls
+        // Ongoing live calls
         this.socket.on( 'call-feed', function ( data ) {
+
             self.onCalls( data );
         } )
 
-        // On call status
+        //Callback list
+        this.socket.on( 'callback-list', function ( data ) {
+            self.onCallback( data )
+        } )
+
+        //Agent status
         this.socket.on( 'cmi-status', function ( data ) {
             self.onStatus( data )
         } )
 
-        // On incomming call count
+        //incoming call count
         this.socket.on( 'live-call-feed', function ( data ) {
             self.onCount( data )
         } )
 
-        // Answered agent count
+        // Agent bridge
         this.socket.on( 'agent-bridged', function ( data ) {
             self.onagentAnswer( data )
         } )
 
-        // Answered customer count
+        //customer bridge
         this.socket.on( 'customer-bridged', function ( data ) {
             self.onAnswer( data )
         } )
 
     }
 
-    //Subscribe call update
-    TeleCMI.prototype.subscribeCalls = function () {
+    //Subscribe agent update
+    CHUB.prototype.subscribeAgents = function ( inetno ) {
 
-        this.socket.emit( 'subscribe-call-feed', { task: 'call feed subscribe' } )
+        this.socket.emit( 'subscribeadmin-agents-list', { inetno: inetno } )
     }
 
-    //Set status Online
-    TeleCMI.prototype.setOnline = function () {
+    //Remove Listener
+    CHUB.prototype.removeAllListeners = function ( inetno ) {
 
-        this.socket.emit( 'change-status', { status: 'online' } )
+        this.socket.removeAllListeners();
     }
 
-    //Set status break
-    TeleCMI.prototype.setBreak = function () {
 
-        this.socket.emit( 'change-status', { status: 'break' } )
+
+    //Nation call barging
+    CHUB.prototype.callBarging = function ( uuid, to, myid ) {
+        if ( !uuid ) {
+
+            this.onStatus( { status: 'error', msg: 'Invalid UUID' } );
+            return;
+        }
+        this.socket.emit( 'admin-call-barging', { uuid: uuid, to: to, myid: myid } )
     }
 
-    //Set status break
-    TeleCMI.prototype.setDialer = function () {
 
-        this.socket.emit( 'change-status', { status: 'dialer' } )
+    //Global call barging
+    CHUB.prototype.globalBarging = function ( uuid, to ) {
+
+        if ( !uuid ) {
+
+            this.onStatus( { status: 'error', msg: 'Invalid UUID' } );
+            return;
+        }
+
+
+
+        this.socket.emit( 'admin-call-globalbarging', { uuid: uuid, to: to } )
     }
+
+
 
     //Subscribe agent update
-    TeleCMI.prototype.subscribeAgents = function () {
-
-        this.socket.emit( 'subscribe-agents-list', { task: 'agent list subscribe' } )
+    CHUB.prototype.subscribeCalls = function ( inetno ) {
+        this.socket.emit( 'admin-get-feed', { inetno: inetno } )
     }
 
 
-    //Subscribe agent update
-    TeleCMI.prototype.getFeed = function () {
+    //Subscribe live call feeds
+    CHUB.prototype.monitorCalls = function ( inetno ) {
+        if ( !inetno ) {
 
-        this.socket.emit( 'get-feed', { task: 'get feed' } );
+            this.onStatus( { status: 'error', msg: 'Invalid APP ID' } );
+            return;
+        }
+
+        this.socket.emit( 'admin-call-feed', { inetno: inetno } )
     }
 
 
 
+    //List of calls
+    CHUB.prototype.onCalls = function ( data ) { }
 
-    // Calls  callback
-    TeleCMI.prototype.onCalls = function ( data ) { }
+    // List of agents
+    CHUB.prototype.onAgents = function ( data ) { }
 
-    // Agents  callback
-    TeleCMI.prototype.onAgents = function ( data ) { }
+    //List of agent status 
+    CHUB.prototype.onStatus = function ( data ) { }
 
-    // Agents  callback
-    TeleCMI.prototype.onStatus = function ( data ) { }
+    //Ongoing calls count
+    CHUB.prototype.onCount = function ( data ) { }
 
-    // Agents  callback
-    TeleCMI.prototype.onCount = function ( data ) { }
+    //Answered agents count
+    CHUB.prototype.onagentAnswer = function ( data ) { }
 
-    TeleCMI.prototype.onConnect = function ( data ) { }
+    //Total answered call
+    CHUB.prototype.onAnswer = function ( data ) { }
 
-    //Answered Agents
-    TeleCMI.prototype.onagentAnswer = function ( data ) { }
-
-    //Custamer Answered
-    TeleCMI.prototype.onAnswer = function ( data ) { }
+    //callback list
+    CHUB.prototype.onCallback = function ( data ) { }
 
 
 } )

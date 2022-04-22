@@ -1,6 +1,6 @@
 {
   "name": "telecmi-agent-livefeed",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "TeleCMI agent live call feed javascript sdk for browser and NodeJS",
   "main": "dist/telecmi-agent-callfeed.min.js",
   "directories": {
